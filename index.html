@@ -1,0 +1,101 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>WordPress Blog</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.theme.min.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <script src="js/modernizr-2.8.3.min.js"></script>
+        <script type="template" id="post-list-tmpl">
+            <%
+                _.each(posts,function(post){
+            %>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>
+                            <a href="<%= post.URL %>" target="_blank">
+                                <%= post.title %>
+                            </a>
+                        </h2>
+                    </div> 
+                    <div class="col-xs-12">
+                        <%= post.excerpt %>
+                    </div>
+                    <div class="col-xs-12">
+                        <a href="#" class="read-more id-<%= post.ID %>">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            <%
+                });
+            %>
+        </script>
+        <script type="template" id="post-tmpl">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>
+                        <a href="<%= post.URL %>" target="_blank">
+                            <%= post.title %>
+                        </a>
+                    </h2>
+                </div> 
+                <div class="col-sm-4">
+                    <%= post.author.name %>
+                </div>
+                <%
+                    var date = new Date(post.date);
+                    var niceDate = date.getUTCFullYear().toString();
+                    niceDate += "-";
+                    niceDate += (date.getUTCMonth() + 1).toString();
+                    niceDate += "-";
+                    niceDate += date.getUTCDate().toString();
+                %>
+                <div class="col-sm-8">
+                    <%= niceDate %>
+                </div>
+                <div class="col-xs-12">
+                    <%= post.content %>
+                </div>
+                <div class="col-xs-12">
+                    <a href="#" class="back">
+                        < Back
+                    </a>
+                </div>
+            </div>
+        </script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+            <div class="modal fade" id="loadingModal" tabindex="-1" role="loading" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div>
+                <i class="fa fa-cog fa-spin"></i>
+                <p>Loading...</p>
+            </div>
+        </div>
+        <header role="banner">
+            <h1>
+                <a href="http://testbonne.wordpress.com" target="_blank">
+                    Wordpress Blog
+                </a>
+            </h1>
+        </header>
+        <main role="main" class="container">
+        </main>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/underscore-min.js"></script>
+        <script src="js/underscore-min.js"></script>
+        <script src="js/wordpress.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
