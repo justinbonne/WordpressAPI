@@ -1,7 +1,7 @@
 var blog = new WordPress({
     "blogUrl":"testbonne.wordpress.com",
     "clientId":"41209",
-    "createUrl":"http://wordpress-api-test.herokuapp.com"
+    "createUrl":"http://wordpress-api-test.herokuapp.com/create.php"
 });
 $(document).ready(function(){
     $("#create-post-form").submit(function(){
