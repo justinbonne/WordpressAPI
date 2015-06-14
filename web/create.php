@@ -2,9 +2,9 @@
 $curl = curl_init( 'https://public-api.wordpress.com/oauth2/token' );
 curl_setopt( $curl, CURLOPT_POST, true );
 curl_setopt( $curl, CURLOPT_POSTFIELDS, array(
-    'client_id' => '41210',
-    'redirect_uri' => 'http://localhost:8000/create.php',
-    'client_secret' => 'Z6pu8vJfp98wiEJOSLyJQyUjnrcJItpYbqC2yEJIOqgcD8K4W511olJLqJUD2Cqg',
+    'client_id' => '41209',
+    'redirect_uri' => 'http://wordpress-api-test.herokuapp.com/create.php',
+    'client_secret' => '23yKp368A3Dq7O2TrwcAJA5iEDTa4f1nrxGm1nT30XJvwSUF8MuuSDLdnM2lQmov',
     'code' => $_GET['code'], // The code from the previous request
     'grant_type' => 'authorization_code'
 ) );

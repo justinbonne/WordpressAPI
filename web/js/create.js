@@ -4,6 +4,9 @@ var blog = new WordPress({
     "createUrl":"http://wordpress-api-test.herokuapp.com/create.php"
 });
 $(document).ready(function(){
+    if(!$("#token").val()){
+        window.location = "index.html";
+    }
     $("#create-post-form").submit(function(){
         blog.createPost();
         return false;
