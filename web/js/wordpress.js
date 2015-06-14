@@ -2,6 +2,9 @@ var WordPress = function (options){
 	this.blogUrl = options.blogUrl;
     this.renderSelector = options.renderSelector;
     this.baseUrl = "https://public-api.wordpress.com/rest/v1.1/sites/";
+    this.authBaseUrl = "https://public-api.wordpress.com/oauth2/authorize";
+    this.clientId = options.clientId;
+    this.createUrl = options.createUrl;
 }
 WordPress.prototype.listPosts = function(){
     var that = this;
@@ -45,6 +48,38 @@ WordPress.prototype.loadPost = function(ID){
             $(that.renderSelector+" .back").click(function(){
                 that.listPosts();
             });
+        },
+        "complete":function(){
+            that.loading(false);
+        }
+    });
+}
+WordPress.prototype.createPost = function(){
+    if(0 > window.location.href.indexOf(this.createUrl)){
+        var authUrl = this.authBaseUrl;
+        authUrl += "?"+ $.param({
+            "client_id": this.clientId,
+            "redirect_uri": this.createUrl,
+            "response_type": "code"
+        });
+        window.location = authUrl;
+        return;
+    }
+    var that = this;
+    this.loading(true);
+    $.ajax({
+        "url": this.baseUrl+this.blogUrl+"/posts/new",
+        "type": 'POST',
+        "data": { 
+            "title": $("#title").val(), 
+            "content": $("#content").val()
+        },
+        "beforeSend" : function( xhr ) {
+            xhr.setRequestHeader( 'Authorization', 'BEARER ' + $("#token").val() );
+        },
+        "success": function(response){
+            console.log(response);
+            window.location = "index.html";
         },
         "complete":function(){
             that.loading(false);
